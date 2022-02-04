@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+$colorScooter: #25c5d8;
+$colorMalibu: #45E9FF;
+
+$primary: $colorScooter;
+$info: $colorMalibu;
+
+@import "../../node_modules/bulma/bulma.sass";

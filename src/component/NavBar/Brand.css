@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.logo-img {
+  position: relative;
+  top: 6px;
+  filter: brightness(140%) hue-rotate(50deg);
+  transform: scale(120%);
+}
+
+.logo-text {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 2px;
+  margin-left: 5px;
+}

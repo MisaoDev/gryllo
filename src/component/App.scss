@@ -1,5 +1,11 @@
+@charset "utf-8";
+@import "custom-bulma.scss";
+
+/**************************************************************/
+
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -36,3 +42,6 @@
     transform: rotate(360deg);
   }
 }
+
+/***********************************************************/
+

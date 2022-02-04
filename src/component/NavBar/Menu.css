@@ -1,0 +1,11 @@
+@media screen and (max-width: 1023px) {
+  #nav-login-button {
+    border-color: gray;
+    color: gray;
+  }
+}
+
+.sign-up-button,
+#nav-login-button {
+  border-radius: 6px !important;
+}

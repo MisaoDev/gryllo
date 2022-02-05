@@ -1,0 +1,32 @@
+@import "../custom-bulma.scss";
+@import "../../../node_modules/bulma/sass/utilities/initial-variables.sass";
+@import "../../../node_modules/bulma/sass/utilities/derived-variables.sass";
+
+.note {
+  .card-header-title {
+    outline: none;
+  }
+
+  .card-content {
+    padding: 0 !important;
+    .content {
+      padding: 24px !important;
+      outline: none;
+    }
+  }
+}
+
+.note:hover {
+  // background-color: $primary !important;
+  box-shadow: 0 0.5em 1em -0.125em rgba($info-light, 1), 0 0px 0 1px rgba($info-light, 1);
+}
+
+.note {
+  .card-header-title:hover {
+    outline: 2px solid rgba($info-dark, 0.4);
+  }
+
+  .card-content:hover {
+    outline: 2px solid rgba($info-dark, 0.4);
+  }
+}

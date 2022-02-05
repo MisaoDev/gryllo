@@ -3,7 +3,7 @@
 import './App.scss';
 import NavBar from './NavBar/NavBar';
 import Footer from './Footer';
-import NoteBoard from './NoteBoard';
+import NoteBoard from './Note/NoteBoard';
 
 function App() {
   return (

@@ -2,9 +2,9 @@
 
 .logo-img {
   position: relative;
-  top: 6px;
+  top: 5px;
   filter: brightness(140%) hue-rotate(50deg);
-  transform: scale(120%);
+  transform: scale(125%);
 }
 
 .logo-text {

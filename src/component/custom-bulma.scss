@@ -6,4 +6,7 @@ $colorMalibu: #45E9FF;
 $primary: $colorScooter;
 $info: $colorMalibu;
 
-@import "../../node_modules/bulma/bulma.sass";
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+$family-sans-serif: "Coming Soon", sans-serif;
+
+$column-gap: 2em;

@@ -5,7 +5,6 @@ function Note(props) {
   const { id, title, content, color } = props;
 
   const noteStyle = {
-    width: '400px',
     backgroundColor: color || '#8AF9FF',
   }
 

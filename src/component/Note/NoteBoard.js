@@ -1,38 +1,30 @@
-import { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useRef, useState } from 'react';
+
 import Note from './Note';
+import AddButton from './AddButton';
+import DeleteButton from './DeleteButton';
 
-const randomTitle = require('random-title');
-const randomSentence = require('random-sentence');
-const randomColor = require('random-color');
-const Color = require('color');
-
-
+import {getEmptyNote, getRandomNote} from '../../util/NoteBuilder';
+import './NoteBoard.scss';
 
 function NoteBoard(props) {
-  const [notes, setNotes] = useState(
-    [...Array(5).keys()].map(x => getRandomNote(x))
-  );
 
-  function getEmptyNote(id) {
-    return {
-      id: id,
-      title: 'New note',
-      content: 'Write your note here',
-      color: randomColor(0.3, 0.9).hexString(),
-    };
+  /* ---------------------------- Note ID generator --------------------------- */
+  const nextId = useRef(0);
+  function getNewId() {
+    return nextId.current++;
   }
 
-  function getRandomNote(id) {
-    return {
-      id: id,
-      title: randomTitle({ min: 1, max: 4 }),
-      content: randomSentence({ min: 5, max: 17 }),
-      color: randomColor(0.2, 1).hexString(),
-    };
-  }
+  /* ----------------------------- Note list state ---------------------------- */
+  const [notes, setNotes] = useState(() => {
+    return [...Array(5).keys()]
+      .map(() => {
+        let id = getNewId();
+        return getRandomNote(id);
+      });
+  });
 
+  /* -------------------------------- Handlers -------------------------------- */
   function handleNoteChange(id, value) {
     setNotes(prev => (
       [...prev].map(note => {
@@ -41,26 +33,28 @@ function NoteBoard(props) {
     ));
   }
 
-  function handleAddNote(event, index) {
-    const id = notes.length;
-    const newNote = getEmptyNote(id);
-
+  function handleAddNote(index) {
+    const id = getNewId();
+    const note = getEmptyNote(id);
+    
     setNotes(prev => {
-      const newArray = prev.slice();
-      newArray.splice(index, 0, newNote);
-      return newArray;
+      const newNotes = prev.slice();
+      newNotes.splice(index, 0, note);
+      return newNotes;
     });
   }
 
-  function handleDeleteNote(event, index) {
-    console.log(index);
+  function handleDeleteNote(index) {
     setNotes(prev => {
-      const newArray = prev.slice();
-      newArray.splice(index, 1);
-      return newArray.length === 0 ? [getEmptyNote(0)] : newArray;
+      const newNotes = prev.slice();
+      newNotes.splice(index, 1);
+      return newNotes.length === 0
+        ? [getEmptyNote(getNewId())]
+        : newNotes;
     });
   }
-
+  /* -------------------------------------------------------------------------- */
+  
   return (
     <section className='note-board'>
       <div className='container px-3'>
@@ -69,15 +63,16 @@ function NoteBoard(props) {
           {notes.map((n, index) => (
             <div key={n.id} className="note-column column is-one-third is-flex is-justify-content-space-around">
 
+              {/* Render the left AddButton only for the first note in each row */}
               {index % 3 !== 0 ? null : (
-                <button
-                  className={"add-button add-button-left" + (index === 0 ? " add-button-first" : '')}
-                  onClick={(e) => { handleAddNote(e, index) }}
-                >
-                  <AddIcon />
-                </button>
+                <AddButton
+                  isLeft={true}
+                  isFirst={index === 0}
+                  position={index}
+                  onAddNote={handleAddNote}
+                />
               )}
-
+              
               <Note
                 id={n.id}
                 title={n.title}
@@ -86,19 +81,18 @@ function NoteBoard(props) {
                 onChange={handleNoteChange}
               />
 
-              <button
-                className="delete-button"
-                onClick={(e) => { handleDeleteNote(e, index) }}
-              >
-                <DeleteIcon />
-              </button>
+              {/* Hidden by default, will be shown with CSS */}
+              <DeleteButton
+                noteIndex={index}
+                onDeleteNote={handleDeleteNote}
+              />
 
-              <button
-                className="add-button add-button-right"
-                onClick={(e) => { handleAddNote(e, index + 1) }}
-              >
-                <AddIcon />
-              </button>
+              {/* Always show the right-hand AddButton */}
+              <AddButton
+                is-left={false}
+                position={index + 1}
+                onAddNote={handleAddNote}
+              />
 
             </div>
           ))}

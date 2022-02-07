@@ -7,8 +7,6 @@ function Brand(props) {
   const burgerClassName = 'navbar-burger' + (burgerActive ? ' is-active' : '');
 
   function Burger() {
-    console.log(burgerActive);
-    console.log(onBurgerChange);
     return (
       <button
         className={burgerClassName}

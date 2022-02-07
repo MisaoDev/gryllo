@@ -27,7 +27,10 @@ npm start
 
 * Figma
 * React
-* React Router* (coming soon)
 * Bulma
+* Sass
+* ~~React Router~~ *
+* ~~React-Tile-Layout~~ *
+* ~~Express~~ *
 
 \* <sub><sup>planned, not yet implemented</sup></sub>

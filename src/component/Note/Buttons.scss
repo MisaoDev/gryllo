@@ -1,0 +1,119 @@
+/* -------------------------------------------------------------------------- */
+/*                      Add Note and Delete Note buttons                      */
+/* -------------------------------------------------------------------------- */
+
+@import "../custom-bulma.scss";
+@import "../../../node_modules/bulma/sass/utilities/initial-variables.sass";
+@import "../../../node_modules/bulma/sass/utilities/derived-variables.sass";
+
+$addButtonColor: #8AF9FF;
+
+/* ------------------------------ Both Buttons ------------------------------ */
+.delete-button, .add-button {
+  position: absolute;
+  z-index: 10;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  width: 2em;
+  height: 2em;
+  transform: scale(120%);
+
+  // Larger hitbox
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: 160%;
+    height: 160%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    // border: 1px solid green; // debug
+  }
+
+  &:hover {
+    transform: scale(150%);
+    opacity: 100%;
+    border-radius: 0;
+    transition: 0.12s ease-out;
+  }
+}
+
+/* --------------------------- Delete Note Button --------------------------- */
+.delete-button {
+  display: none;
+  top: -0.4em;
+  left: calc( 50% - 1em );
+
+  border: 1px solid $danger;
+  color: $danger;
+  opacity: 50%;
+
+  &>*:first-child {
+    width: 80%;
+  }
+
+  &:hover {
+    display: block;
+    background-color: transparent;
+    border: 1px solid $danger;
+  }
+
+  @media screen and(max-width: 768px) {
+    top: calc( 50% - 1em );
+    left: auto;
+    right: 0.3em;
+  }
+}
+
+// Display while editing a note
+.note:focus-within {
+  & + .delete-button {
+    display: block;
+  }
+}
+
+/* ----------------------------- Add Note Button ---------------------------- */
+.add-button {
+  top: calc( 50% - 1em );
+  background-color: $info;
+  opacity: 20%;
+
+  // Applies to the very first left-hand button
+  &.add-button-first {
+    left: -1em;
+    // background-color: green !important; //debug
+
+    @media screen and(max-width: 768px) {
+      left: calc(50% - 1em);
+      top: -1em;
+    }
+  }
+
+  // Applies to all the others left-hand buttons
+  &.add-button-left:not(.add-button-first) {
+    left: -1em;
+    // background-color: red; //debug
+    
+    @media screen and(max-width: 768px) {
+      display: none;
+    }
+  }
+
+  // Applies to right-hand buttons
+  &.add-button-right {
+    right: -1em;
+
+    @media screen and(max-width: 768px) {
+      left: calc(50% - 1em);
+      top: auto;
+      bottom: -1em;
+    }
+  }
+
+  &:hover {
+    background-color: $addButtonColor;
+  }
+}
